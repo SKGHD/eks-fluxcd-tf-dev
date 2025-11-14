@@ -1,12 +1,15 @@
+
 {
   "name": "AWS EKS Terraform Lab",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "features": {
-    "aws-cli": "latest",
-    "terraform": "latest",
-    "kubectl": "latest"
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/terraform:1": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {}
   },
-  "postCreateCommand": "curl -s https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash",
+  "postCreateCommand": "apt-get update && apt-get install -y jq && curl -s https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.tar.gz | tar -xz -C /usr/local/bin && curl -s https://github.com/fluxcd/flux2/releases/latest/download/flux_Linux_amd64.tar.gz | tar -xz -C /usr/local/bin",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -16,5 +19,6 @@
         "amazonwebservices.aws-toolkit-vscode"
       ]
     }
-  }
+  },
+  "remoteUser": "vscode"
 }
