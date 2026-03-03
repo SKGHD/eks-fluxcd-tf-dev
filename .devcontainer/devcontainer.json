@@ -9,9 +9,10 @@
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/common-utils:2": {},
     "ghcr.io/rio/features/k9s:1" : {},
-    "ghcr.io/jsburckhardt/devcontainer-features/flux:1" : {}
+    "ghcr.io/jsburckhardt/devcontainer-features/flux:1" : {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  "postCreateCommand": "apt-get update && apt-get install -y jq && curl -s https://github.com/derailed/k9s/releases/latest/download/k9s_Linux_amd64.tar.gz | tar -xz -C /usr/local/bin && curl -s https://github.com/fluxcd/flux2/releases/latest/download/flux_Linux_amd64.tar.gz | tar -xz -C /usr/local/bin",
+  "postCreateCommand": "apt-get update && apt-get install -y python3 python3-pip jq curl wget && echo 'Installing kind...' && curl -Lo /usr/local/bin/kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64 && chmod +x /usr/local/bin/kind && echo 'Installing yq...' && curl -sL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq && echo 'Installing flux...' && curl -sL https://github.com/fluxcd/flux2/releases/latest/download/flux_linux_amd64.tar.gz | tar xz -C /usr/local/bin && echo 'Tools installed successfully'",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -22,5 +23,6 @@
       ]
     }
   },
-  "remoteUser": "vscode"
+  "remoteUser": "vscode",
+  "runArgs": ["--privileged"]
 }
